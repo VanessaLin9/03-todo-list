@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react';
+import React, { memo } from 'react';
 import cx from 'classnames';
 import RenderTip from '../RenderTip';
 // TODO
@@ -10,16 +10,17 @@ type TodoItemProps = {
   done: boolean,
   text: string,
   onToggleItem: (id: string) => void,
+  onDeleteItem: (id: string) => void,
 };
 
-const TodoItem: React.FC<TodoItemProps> = (props) => {
-  const { id, text, done, onToggleItem, onDeleteTodo } = props;
+const TodoItem: React.FC<TodoItemProps> = memo((props) => {
+  const { id, text, done, onToggleItem, onDeleteItem } = props;
 
   const atClick = () => {
     onToggleItem(id);
   };
   const atDelete = () => {
-    onDeleteTodo(id);
+    onDeleteItem(id);
   };
 
   return (
@@ -34,6 +35,6 @@ const TodoItem: React.FC<TodoItemProps> = (props) => {
       </button>
     </section>
   );
-};
+});
 
 export default TodoItem;

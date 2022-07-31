@@ -15,10 +15,6 @@ const initialList: TodoType[] = [
   { id: 'id2', text: '年薪百萬', done: false },
 ];
 
-const TodoFormMemo = memo(TodoForm);
-const TodoItemMemo = memo(TodoItem);
-const TodoFilterMemo = memo(TodoFilter);
-
 const TodoList = () => {
   const [list, setList] = useState(initialList);
   const [filterType, setFilterType] = useState('all');
@@ -49,7 +45,7 @@ const TodoList = () => {
     [list],
   );
 
-  const atDeleteTodo = useCallback(
+  const atDeleteItem = useCallback(
     (id: string) => {
       const updateList = list.filter((todo: TodoType) => todo.id !== id);
       setList(updateList);
@@ -76,17 +72,17 @@ const TodoList = () => {
   return (
     <section className="todo-list" data-name="TodoList">
       <RenderTip />
-      <TodoFormMemo onAddItem={atAddItem} />
-      <TodoFilterMemo filterType={filterType} onFilterChange={atFilterChange} />
+      <TodoForm onAddItem={atAddItem} />
+      <TodoFilter filterType={filterType} onFilterChange={atFilterChange} />
       <div>
         {filtersList.map((item) => (
-          <TodoItemMemo
+          <TodoItem
             key={item.id}
             id={item.id}
             done={item.done}
             text={item.text}
             onToggleItem={atToggleItem}
-            onDeleteTodo={atDeleteTodo}
+            onDeleteItem={atDeleteItem}
           />
         ))}
       </div>

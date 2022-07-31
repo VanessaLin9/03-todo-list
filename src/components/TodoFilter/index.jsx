@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import cx from 'classnames';
 import RenderTip from '../RenderTip';
 import './TodoFilter.scss';
@@ -8,7 +8,7 @@ type TodoFilterProps = {
   onFilterChange: (type: string) => void,
 };
 
-const TodoFilter: React.FC<TodoFilterProps> = (props) => {
+const TodoFilter: React.FC<TodoFilterProps> = memo((props) => {
   const { onFilterChange, filterType } = props;
   let allClass = 'btn btn-link';
   if (filterType === 'all') {
@@ -34,5 +34,5 @@ const TodoFilter: React.FC<TodoFilterProps> = (props) => {
       </button>
     </section>
   );
-};
+});
 export default TodoFilter;
